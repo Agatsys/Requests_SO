@@ -6,8 +6,8 @@ const instance = axios.create({
 })
 
 export const questionAPI = {
-    getQuestions(currentPage = 1, pageSize = 5, sort = activity) {
-        return instance.get(`answers?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow`)
+    getQuestions(currentPage = 1, pageSize = 5, sort = "activity") {
+        return instance.get(`questions?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow`)
             .then(response => {
                 return response.data
             })

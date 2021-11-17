@@ -1,14 +1,8 @@
-.main_page_question {
+.main-page-question {
     width: 800px;
     min-height: 150px;
-    background-color: rgb(221, 220, 217);
     padding: 13px;
     cursor: pointer;
-    transition: box-shadow 0.4s;
-    &:hover {
-        box-shadow: 0px 0px 30px rgb(238, 218, 156);
-        background-color: rgb(223, 217, 199);
-    }
     &__title {
         font-size: 25px;
     }

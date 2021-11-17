@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { AppState } from '../../store/reducers/root.reducer'
 import Question from "../../components/Question/Question";
 import "./MainPage.scss";
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Typography from '@mui/material/Typography';
 import ModalAnswers from "../../components/ModalAnswers/ModalAnswers";
+import Pagination from '@mui/material/Pagination';
+import { getQuestionsTC } from "../../store/actions/actions";
+import { connect } from "react-redux";
+import { QuestionItem } from "store/reducers/questions.reducer";
 
 
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -21,42 +24,65 @@ const style = {
     p: 4,
 };
 
-const MainPage = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+type StateProps = {
+    items: Array<QuestionItem>
+    isFetching: boolean
+}
+type DispatchProps = {
+    getQuestions: () => void;
+}
+type Props = StateProps & DispatchProps
+
+const MainPage = (props: Props) => {
+    const [modal, setModal] = useState(null);
+
+    useEffect(() => {
+        props.getQuestions()
+        // eslint-disable-next-line
+    }, [])
+
+    const handleOpen = (id: number) => setModal(id);
+    const handleClose = () => setModal(null);
 
     return (
-        <div className="main_page">
-            <div className="main_page__sidebar">
+        <div className="main-page">
+            <div className="main-page__sidebar">
                 sidebar
             </div>
-            <div className="main_page__question_wrapper">
-                <Question />
+            <div className="main-page__question-wrapper">
+                {props.items && props.items.map(item => (
+                    <Question
+                        data={item}
+                        key={item.question_id}
+                        onOpenAnswers={(id: number) => handleOpen(id)}
+                    />
+                ))}
+                <Pagination count={10} />
             </div>
-            <button onClick={handleOpen}>modal</button>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{timeout: 500}} >
-                <Fade in={open}>
-                    <Box sx={style}>
-                        <ModalAnswers />
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
+            {modal && (
+                <Modal
+                    open={true}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{ timeout: 500 }}
+                >
+                    <Box sx={style as any}>
+                        <ModalAnswers questionId={modal as number} />
                     </Box>
-                </Fade>
-            </Modal>
+                </Modal>
+            )}
+
         </div>
     )
 }
 
-export default MainPage;
+const mapStateToProps = (state: AppState) => ({
+    items: state.questions.items,
+    isFetching: state.questions.isFetching
+})
+const mapDispatchToProps = {
+    getQuestions: getQuestionsTC
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
