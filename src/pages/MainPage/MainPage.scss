@@ -1,0 +1,10 @@
+.main_page {
+    display: flex;
+    &__sidebar {
+        width: 200px;
+    }
+    &__question_wrapper {
+        width: 500px;
+    }
+}
+

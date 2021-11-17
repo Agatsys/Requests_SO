@@ -1,1 +1,9 @@
-@import './normalize'
+@import './normalize';
+
+
+.app_wrapper {
+    background-color: rgb(246, 245, 243);
+    height: 800px;
+    width: 100%;
+    padding: 3%;
+}
