@@ -22,6 +22,7 @@ export type AnswerItem = {
     answer_id: number,
     question_id: number,
     content_license: string
+    body?: any
 }
 
 let initialState: AnswersReducerState = {

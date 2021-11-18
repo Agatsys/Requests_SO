@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import { getAnswers } from 'store/actions/actions'
 import { connect } from "react-redux";
 import Answer from "components/Answer/Answer";
+import { AnswerItem } from "store/reducers/answers.reducer";
 
 const style = {
     position: 'absolute',
@@ -22,9 +23,8 @@ const style = {
 };
 
 type StateProps = {
-
+    items: Array<AnswerItem>
 }
-
 type OwnProps = {
     isOpen: boolean;
     questionId: number;
@@ -35,7 +35,7 @@ type DispatchProps = {
 }
 type Props = OwnProps & DispatchProps & StateProps
 
-const ModalAnswers = ({ isOpen, questionId, handleClose, getAnswers }: Props) => {
+const ModalAnswers = ({ items, isOpen, questionId, handleClose, getAnswers }: Props) => {
 
     useEffect(() => {
         if (questionId !== null) {
@@ -61,17 +61,21 @@ const ModalAnswers = ({ isOpen, questionId, handleClose, getAnswers }: Props) =>
                         Bebra and her friends
                     </div>
                 </div>
-                {/* {props.items.map(item => (
-                    <Answer/>
-                ))} */}
+                <>
+                    {items.map(item => (
+                        <Answer
+                            key={item.answer_id}
+                            data={item}/>
+                    ))}
+                </>
             </Box>
         </Modal>
 
     )
 }
-const mapStateToProps = (state: AppState) => {
-    // items: state.
-}
+const mapStateToProps = (state: AppState) => ({
+    items: state.answers.items
+})
 const mapDispatchToProps = {
     getAnswers: getAnswers
 }

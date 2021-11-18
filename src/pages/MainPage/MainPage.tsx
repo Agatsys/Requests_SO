@@ -49,7 +49,6 @@ const MainPage = (props: Props) => {
     
     const openModal = (id: number) => setModalState({ isOpen: true, questionId: id }) 
     const closeModal = () => setModalState({ isOpen: false, questionId: null })
-
     const handleChange = (event: SelectChangeEvent) => {
         setSort(event.target.value as string);
     };

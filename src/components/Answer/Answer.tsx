@@ -1,12 +1,19 @@
 import React from "react";
 import Card from '@mui/material/Card';
 import "./Answer.scss"
+import { AnswerItem } from "store/reducers/answers.reducer";
 
 
-const Answer = () => {
+type OwnProps = {
+    data: AnswerItem;
+}
+type Props = OwnProps
+
+const Answer = (props: Props) => {
     return (
         <Card className="modal-window-answer"> 
-            <div className="modal-window-answer__text" dangerouslySetInnerHTML={{ __html: 'body' }}>
+            <div className="modal-window-answer__text" dangerouslySetInnerHTML={{ __html: props.data.body }}>
+
             </div>
         </Card>
     )

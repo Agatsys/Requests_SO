@@ -1,14 +1,13 @@
-import questionsReducer from './questions.reducer'
-import answersReducer from "./answers.reducer";
-import filterReducer from './filter.reducer'
 import { combineReducers } from "redux";
-import { QuestionsReducerState } from './questions.reducer'
-import { FilterReducerState } from './filter.reducer'
+import answersReducer, { AnswersReducerState } from "./answers.reducer";
+import questionsReducer, { QuestionsReducerState } from './questions.reducer'
+import filterReducer, { FilterReducerState } from './filter.reducer'
 
 
 export type AppState = {
     questions: QuestionsReducerState;
     filter: FilterReducerState;
+    answers: AnswersReducerState;
 }
 
 const reducers = combineReducers({

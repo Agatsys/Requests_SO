@@ -15,7 +15,7 @@ export const questionAPI = {
 }
 
 export const answersAPI = {
-    getAnswers(questionId, currentPage) {
+    getAnswers(questionId) {
         return instance.get(`questions/${questionId}/answers?page=1&pagesize=20&order=desc&sort=activity&site=stackoverflow&filter=withbody`)
             .then(response => {
                 return response.data
