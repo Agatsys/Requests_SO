@@ -13,3 +13,12 @@ export const questionAPI = {
             })
     },
 }
+
+export const answersAPI = {
+    getAnswers() {
+        return instance.get(``)
+            .then(response => {
+                return response.data
+            })
+    }
+}

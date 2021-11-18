@@ -1,15 +1,22 @@
 .main-page {
     display: flex;
+    border: 1px solid black;
     &__sidebar {
         width: 400px;
     }
     &__question-wrapper {
         display: flex;
+        border: 1px solid black;
         gap: 20px;
         flex-direction: column;
         align-items: center;
         width: 500px;
         min-height: calc(100vh - 100px);;
+        
+    }
+    
+    &__modal-box {
+        height: calc(100vh - 30px);
     }
 }
 

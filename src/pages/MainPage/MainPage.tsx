@@ -7,9 +7,10 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import ModalAnswers from "../../components/ModalAnswers/ModalAnswers";
 import Pagination from '@mui/material/Pagination';
-import { getQuestionsTC } from "../../store/actions/actions";
+import { getQuestions } from "../../store/actions/actions";
 import { connect } from "react-redux";
 import { QuestionItem } from "store/reducers/questions.reducer";
+import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
 
 
 const style = {
@@ -26,7 +27,7 @@ const style = {
 
 type StateProps = {
     items: Array<QuestionItem>
-    isFetching: boolean
+    questionsIsFetching: boolean
 }
 type DispatchProps = {
     getQuestions: () => void;
@@ -38,51 +39,56 @@ const MainPage = (props: Props) => {
 
     useEffect(() => {
         props.getQuestions()
-        // eslint-disable-next-line
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleOpen = (id: number) => setModal(id);
     const handleClose = () => setModal(null);
 
+    console.log(props.questionsIsFetching)
     return (
         <div className="main-page">
             <div className="main-page__sidebar">
                 sidebar
             </div>
             <div className="main-page__question-wrapper">
-                {props.items && props.items.map(item => (
-                    <Question
-                        data={item}
-                        key={item.question_id}
-                        onOpenAnswers={(id: number) => handleOpen(id)}
-                    />
-                ))}
+                <Pagination count={10} />
+                {props.questionsIsFetching
+                    ? <CustomSkeleton />
+                    : <>
+                        {props.items.map(item => (
+                            <Question
+                                data={item}
+                                key={item.question_id}
+                                onOpenAnswers={(id: number) => handleOpen(id)}
+                            />
+                        ))}
+                    </> 
+                }
                 <Pagination count={10} />
             </div>
-            {modal && (
+            {/* {modal && ( */}
                 <Modal
-                    open={true}
+                    open={false}
                     onClose={handleClose}
                     closeAfterTransition
                     BackdropComponent={Backdrop}
-                    BackdropProps={{ timeout: 500 }}
-                >
+                    BackdropProps={{ timeout: 500 }} >
                     <Box sx={style as any}>
                         <ModalAnswers questionId={modal as number} />
                     </Box>
                 </Modal>
-            )}
-
+            {/* )} */}
         </div>
     )
 }
 
 const mapStateToProps = (state: AppState) => ({
     items: state.questions.items,
-    isFetching: state.questions.isFetching
+    questionsIsFetching: state.questions.questionsIsFetching
 })
 const mapDispatchToProps = {
-    getQuestions: getQuestionsTC
+    getQuestions: getQuestions
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

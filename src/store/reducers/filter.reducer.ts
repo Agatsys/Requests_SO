@@ -1,7 +1,5 @@
-import { 
-    SET_CURRENT_PAGE,
-    SET_TOTAL_QUESTIONS_COUNT
-} from '../actions/actions'
+import { SET_CURRENT_PAGE, SET_TOTAL_QUESTIONS_COUNT } from '../actions/actions'
+
 
 export type FilterReducerState = {
     pageSize: number,

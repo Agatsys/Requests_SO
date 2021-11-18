@@ -1,12 +1,9 @@
-import { 
-    DATA_IS_FETCHING,
-    SET_QUESTIONS
-} from '../actions/actions'
+import { QUESTIONS_IS_FETCHING, SET_QUESTIONS } from '../actions/actions'
+
 
 export type QuestionsReducerState = {
     items: Array<QuestionItem>;
-    isFetching: boolean;
-    [key: string]: any
+    questionsIsFetching: boolean;
 }
 export type QuestionItem = {
     tags: Array<string>;
@@ -34,18 +31,19 @@ export type QuestionItem = {
 
 let initialState: QuestionsReducerState = {
     items: [],
-    isFetching: false,
+    questionsIsFetching: false,
 }
+console.log(initialState.questionsIsFetching)
 
-const rootReducer = (state = initialState, action) => {
+const questionsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_QUESTIONS:
             return { ...state, items: action.payload }
-        case DATA_IS_FETCHING:
-            return { ...state, isFetching: action.payload }
+        case QUESTIONS_IS_FETCHING:
+            return { ...state, questionsIsFetching: action.payload }
         default:
             return state; 
+        }
     }
-}
-
-export default rootReducer;
+            
+export default questionsReducer;

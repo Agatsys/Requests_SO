@@ -15,11 +15,11 @@ const ModalAnswers = ({ questionId } : Props) => {
     }, [])
 
     return (
-        <div className="main_page_modal">
-            <div className="main_page_modal__title">
+        <div className="main-page-modal">
+            <div className="main-page-modal__title">
                 Title and bla bla bla
             </div>
-            <div className="main_page_modal__text">
+            <div className="main-page-modal__text">
                 Bebra and her friends
             </div>
         </div>
