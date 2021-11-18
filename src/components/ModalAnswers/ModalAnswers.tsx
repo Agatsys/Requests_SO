@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import "./ModalAnswers.scss"
+import { AppState } from '../../store/reducers/root.reducer'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { getAnswers } from 'store/actions/actions'
 import { connect } from "react-redux";
+import Answer from "components/Answer/Answer";
 
 const style = {
     position: 'absolute',
@@ -12,11 +14,16 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 900,
+    height: 700,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
+
+type StateProps = {
+
+}
 
 type OwnProps = {
     isOpen: boolean;
@@ -26,10 +33,9 @@ type OwnProps = {
 type DispatchProps = {
     getAnswers: (questionId: number) => void;
 }
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & DispatchProps & StateProps
 
 const ModalAnswers = ({ isOpen, questionId, handleClose, getAnswers }: Props) => {
-
 
     useEffect(() => {
         if (questionId !== null) {
@@ -37,8 +43,6 @@ const ModalAnswers = ({ isOpen, questionId, handleClose, getAnswers }: Props) =>
         }
         // eslint-disable-next-line
     }, [questionId])
-
-    
 
     return (
         <Modal
@@ -51,20 +55,25 @@ const ModalAnswers = ({ isOpen, questionId, handleClose, getAnswers }: Props) =>
             <Box sx={style as any} >
                 <div className="main-page-modal">
                     <div className="main-page-modal__title">
-                        Title and bla bla bla
+                        Title question
                     </div>
                     <div className="main-page-modal__text">
                         Bebra and her friends
                     </div>
                 </div>
+                {/* {props.items.map(item => (
+                    <Answer/>
+                ))} */}
             </Box>
         </Modal>
 
     )
 }
-
+const mapStateToProps = (state: AppState) => {
+    // items: state.
+}
 const mapDispatchToProps = {
     getAnswers: getAnswers
 }
 
-export default connect(null, mapDispatchToProps)(ModalAnswers);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalAnswers);

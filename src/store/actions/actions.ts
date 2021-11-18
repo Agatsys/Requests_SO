@@ -1,5 +1,5 @@
 import { answersAPI, questionAPI } from "../../api/api"
-
+import { AppState } from 'store/reducers/root.reducer'
 
 export const SET_QUESTIONS = "SET_QUESTIONS"
 export const SET_ANSWERS = "SET_ANSWERS"
@@ -13,15 +13,24 @@ export const SET_SORT_RULES = "SET_SORT_RULES"
 
 export const setQuestions = (questions) => ({ type: SET_QUESTIONS, payload: questions })
 
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, payload: currentPage })
+export const setCurrentPage = (currentPage) => (dispatch) =>{
+    dispatch({ type: SET_CURRENT_PAGE, payload: currentPage })
+    dispatch(getQuestions())
+} 
 
-export const setPageSize = (pageSize) => ({ type: SET_PAGE_SIZE, payload: pageSize })
+export const setPageSize = (pageSize) => (dispatch) => {
+    dispatch({ type: SET_PAGE_SIZE, payload: pageSize })
+    dispatch(getQuestions())
+} 
 
 export const questionsIsFetching = (isFetching) => ({ type: QUESTIONS_IS_FETCHING, payload: isFetching })
 
 export const setTotalQuestionsCount = (totalQuestionsCount) => ({ type: SET_TOTAL_QUESTIONS_COUNT, payload: totalQuestionsCount })
 
-export const getQuestions = (currentPage, pageSize, sort) => async (dispatch) => {
+export const getQuestions = () => async (dispatch, getState: () => AppState) => {
+    
+    const { currentPage, pageSize, sort } = getState().filter
+
     try {
         dispatch(questionsIsFetching(true));
         const data = await questionAPI.getQuestions(currentPage, pageSize, sort)
@@ -29,7 +38,7 @@ export const getQuestions = (currentPage, pageSize, sort) => async (dispatch) =>
         dispatch(setQuestions(data.items));
         dispatch(setTotalQuestionsCount(data.quota_max));
     } catch(error) {
-        console.log(error)
+        console.error(error)
     }
 }
 export const setAnswers = (answers) => ({ type: SET_ANSWERS, payload: answers })
@@ -43,7 +52,11 @@ export const getAnswers = (questionId) => async (dispatch) => {
         dispatch(answersIsFetching(false));
         dispatch(setAnswers(data.items));
     } catch(error) {
-        console.log(error)
+        console.error(error)
     }
 } 
-export const setSortRules = (sort) => ({ type: SET_SORT_RULES, payload: sort })
+
+export const setSortRules = (sort) => (dispatch) =>{
+    dispatch({ type: SET_SORT_RULES, payload: sort })
+    dispatch(getQuestions())
+} 

@@ -3,7 +3,7 @@ import { AppState } from '../../store/reducers/root.reducer'
 import Question from "../../components/Question/Question";
 import "./MainPage.scss";
 import Pagination from '@mui/material/Pagination';
-import { getQuestions, setPageSize, setSortRules } from "../../store/actions/actions";
+import { getQuestions, setPageSize, setSortRules, setCurrentPage } from "../../store/actions/actions";
 import { connect } from "react-redux";
 import { QuestionItem } from "store/reducers/questions.reducer";
 import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
@@ -26,9 +26,10 @@ type StateProps = {
     sort: string
 }
 type DispatchProps = {
-    getQuestions: (currentPage: number, pageSize: number, sort: string) => void;
+    getQuestions: () => void;
     setPageSize: (pageSize: number) => void;
     setSortRules: (sort: string) => void;
+    setCurrentPage: (page: number) => void;
 }
 type Props = StateProps & DispatchProps
 
@@ -42,31 +43,18 @@ const MainPage = (props: Props) => {
         questionId: null
     })
     useEffect(() => {
-        props.getQuestions(props.currentPage, props.pageSize, props.sort)
+        props.getQuestions()
         // eslint-disable-next-line
     }, [])
-    useEffect(() => {
-        props.getQuestions(props.currentPage, props.pageSize, props.sort)
-        // eslint-disable-next-line
-    }, [props.currentPage, props.pageSize, props.sort])
     
     const openModal = (id: number) => setModalState({ isOpen: true, questionId: id }) 
-    const closeModal = () => setModalState({ isOpen: true, questionId: null })
-
-
-
+    const closeModal = () => setModalState({ isOpen: false, questionId: null })
 
     const handleChange = (event: SelectChangeEvent) => {
         setSort(event.target.value as string);
     };
-
-
-
-        
     
-
     const pagesCount = Math.ceil(props.totalQuestionsCount / props.pageSize)
-
 
     return (
         <div className="main-page">
@@ -97,7 +85,11 @@ const MainPage = (props: Props) => {
             </div>
             <div className="main-page__question-wrapper">
                 <Pagination 
-                    count={pagesCount} />
+                    onChange={(event, page) => {
+                        props.setCurrentPage(page)
+                    }}
+                    count={pagesCount} 
+                />
                 {props.questionsIsFetching
                     ? <CustomSkeleton />
                     : <>
@@ -130,7 +122,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = {
     getQuestions: getQuestions,
     setPageSize: setPageSize,
-    setSortRules: setSortRules
+    setSortRules: setSortRules,
+    setCurrentPage: setCurrentPage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

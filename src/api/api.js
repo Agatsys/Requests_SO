@@ -2,7 +2,7 @@ import * as axios from 'axios';
 
 
 const instance = axios.create({
-    baseURL: 'https://api.stackexchange.co/2.3/'
+    baseURL: 'https://api.stackexchange.com/2.3/'
 })
 
 export const questionAPI = {
@@ -15,8 +15,8 @@ export const questionAPI = {
 }
 
 export const answersAPI = {
-    getAnswers(questionId) {
-        return instance.get(`questions/${questionId}/answers?page=1&pagesize=20&order=desc&sort=activity&site=stackoverflow`)
+    getAnswers(questionId, currentPage) {
+        return instance.get(`questions/${questionId}/answers?page=1&pagesize=20&order=desc&sort=activity&site=stackoverflow&filter=withbody`)
             .then(response => {
                 return response.data
             })

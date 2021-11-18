@@ -4,9 +4,6 @@ import { QuestionItem } from '../../store/reducers/questions.reducer'
 import Card from '@mui/material/Card';
 
 
-
-
-
 type OwnProps = {
     data: QuestionItem;
     openModal: (questionId: number) => void;
