@@ -5,12 +5,12 @@ import Skeleton from '@mui/material/Skeleton';
 
 const CustomSkeleton = () => {
     return (
-        <Box width={300} >
-            <Skeleton height={100} animation="wave" />
-            <Skeleton height={100} animation="wave" />
-            <Skeleton height={100} animation="wave" />
-            <Skeleton height={100} animation="wave" />
-            <Skeleton height={100} animation="wave" />
+        <Box width={800} >
+            <Skeleton height={150} animation="wave" />
+            <Skeleton height={150} animation="wave" />
+            <Skeleton height={150} animation="wave" />
+            <Skeleton height={150} animation="wave" />
+            <Skeleton height={150} animation="wave" />
         </Box>
     )
 }

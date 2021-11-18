@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AppState } from '../../store/reducers/root.reducer'
 import Question from "../../components/Question/Question";
 import "./MainPage.scss";
 import Pagination from '@mui/material/Pagination';
-import { getQuestions, setPageSize } from "../../store/actions/actions";
+import { getQuestions, setPageSize, setSortRules } from "../../store/actions/actions";
 import { connect } from "react-redux";
 import { QuestionItem } from "store/reducers/questions.reducer";
 import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import Menu from '@mui/material/Menu';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import ModalAnswers from '../../components/ModalAnswers/ModalAnswers'
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+
 
 
 type StateProps = {
@@ -24,29 +28,42 @@ type StateProps = {
 type DispatchProps = {
     getQuestions: (currentPage: number, pageSize: number, sort: string) => void;
     setPageSize: (pageSize: number) => void;
+    setSortRules: (sort: string) => void;
 }
 type Props = StateProps & DispatchProps
 
 
+
 const MainPage = (props: Props) => {
+
+    const [sort, setSort] = useState('');
+    const [modalState, setModalState] = useState({
+        isOpen: false,
+        questionId: null
+    })
     useEffect(() => {
         props.getQuestions(props.currentPage, props.pageSize, props.sort)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, [])
     useEffect(() => {
         props.getQuestions(props.currentPage, props.pageSize, props.sort)
+        // eslint-disable-next-line
     }, [props.currentPage, props.pageSize, props.sort])
+    
+    const openModal = (id: number) => setModalState({ isOpen: true, questionId: id }) 
+    const closeModal = () => setModalState({ isOpen: true, questionId: null })
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+
+
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setSort(event.target.value as string);
     };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
 
+
+        
+    
 
     const pagesCount = Math.ceil(props.totalQuestionsCount / props.pageSize)
 
@@ -59,44 +76,46 @@ const MainPage = (props: Props) => {
                     <Button onClick={() => props.setPageSize(10)}>10</Button>
                     <Button onClick={() => props.setPageSize(15)}>15</Button>
                 </ButtonGroup>
-                <Button
-                    id="basic-button"
-                    aria-controls="basic-menu"
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                >
-                    Dashboard
-                </Button>
-                <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                    }}
-                >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                </Menu>
+                <div className="main-page__sort">
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={sort}
+                            label="Agdededede"
+                            onChange={handleChange}>
+                            <MenuItem value={"activity"} onClick={() => props.setSortRules("activity")}>Activity</MenuItem>
+                            <MenuItem value={"votes"} onClick={() => props.setSortRules("votes")}>Votes</MenuItem>
+                            <MenuItem value={"creation"} onClick={() => props.setSortRules("creation")}>Creation</MenuItem>
+                            <MenuItem value={"hot"} onClick={() => props.setSortRules("hot")}>Hot</MenuItem>
+                            <MenuItem value={"week"} onClick={() => props.setSortRules("week")}>Week</MenuItem>
+                            <MenuItem value={"month"} onClick={() => props.setSortRules("month")}>Month</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
             </div>
             <div className="main-page__question-wrapper">
+                <Pagination 
+                    count={pagesCount} />
                 {props.questionsIsFetching
                     ? <CustomSkeleton />
                     : <>
                         {props.items.map(item => (
                             <Question
+                                openModal={(questionId: number) => openModal(questionId)}
                                 data={item}
                                 key={item.question_id}
-                                id={item.question_id}
                             />
                         ))}
                     </>
-                }
-                <Pagination count={10} />
+                } 
             </div>
+            <ModalAnswers 
+                handleClose={() => closeModal()}
+                questionId={modalState.questionId}
+                isOpen={modalState.isOpen}
+            />
         </div>
     )
 }
@@ -110,7 +129,10 @@ const mapStateToProps = (state: AppState) => ({
 })
 const mapDispatchToProps = {
     getQuestions: getQuestions,
-    setPageSize: setPageSize
+    setPageSize: setPageSize,
+    setSortRules: setSortRules
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+
+
