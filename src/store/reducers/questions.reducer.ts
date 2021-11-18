@@ -33,7 +33,7 @@ let initialState: QuestionsReducerState = {
     items: [],
     questionsIsFetching: false,
 }
-console.log(initialState.questionsIsFetching)
+
 
 const questionsReducer = (state = initialState, action) => {
     switch (action.type) {

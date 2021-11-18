@@ -2,6 +2,8 @@
 
 
 .app_wrapper {
+    display: flex;
+    justify-content: center;
     background-color: rgb(246, 245, 243);
     min-height: 800px;
     width: 100%;
