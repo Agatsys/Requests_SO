@@ -79,9 +79,13 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                     }
                 </div>
                 <div className="main-page-modal__tags">
+                    {/* {ownQuestion(questionId, questionsItems).map(item => (
 
+                    )) */}
+
+                    {/* } */}
                 </div>
-                <div className="main-page-modal__answers">
+                <div className="main-page-modal__answers-title">
                     Answers:
                     {items.map(item => (
                         <Answer

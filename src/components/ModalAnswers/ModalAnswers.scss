@@ -1,21 +1,47 @@
 
 .main-page-modal {
+    font-family: Ubuntu;
     width: 1000px;
-    height: auto;
+    height: 700px;
     max-width: calc(100vw - 30px);
     max-height: calc(100vh - 30px);
     overflow: auto;
+    border: none !important;
+    border-radius: 5px !important;
+    
+    scrollbar-width: auto;                       // scrollbar
+    scrollbar-color: #dbdbdb transparent;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: #dadada;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #b8b8b8;
+    }
     &__title {
         font-size: 25px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         color: rgb(15, 55, 114);
+        border-bottom: 2px solid black;
+        line-height: 1.2;
     }
     &__text {
+        font-size: 18px; 
+        line-height: 1.2;
+        h3 {
+            font-size: 11px; 
+        }
         p {
+            font-size: 18px; 
             line-height: 1.2;
             text-indent: 20px;
-            margin-top: 8px;
-            font-size: 18px; 
+            margin: 4px 0;
             color: rgb(2, 13, 49);
         }
         pre {
@@ -31,10 +57,26 @@
             padding: 13px;
             margin: 6px 0 6px 0;
         }
+        img {
+            border: 1px solid rgb(14, 10, 10);
+            margin: 15px;
+            max-width: 100%;
+        }
+        li {
+            font-size: 18px; 
+            line-height: 1.2;
+            margin-left: 20px;
+        }
+        strong {
+            font-weight: normal;
+        }
+        
     }
-    &__answers {
-        margin: 12px 0 5px 0;
+    &__answers-title {
+        margin: 20px 0 5px 0;
+        height: 40px;
         font-size: 25px; 
         color: rgb(4, 5, 114);
+        border-bottom: 2px solid black;
     }
 }

@@ -1,7 +1,10 @@
 @import './normalize';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
 
 
 .app_wrapper {
+    font-family: Ubuntu;
     display: flex;
     justify-content: center;
     background-color: rgb(246, 245, 243);

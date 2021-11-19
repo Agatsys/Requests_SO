@@ -1,8 +1,7 @@
 import * as axios from 'axios';
 
-
 const instance = axios.create({
-    baseURL: 'https://api.stackexchange.co/2.3/'
+    baseURL: 'https://api.stackexchange.com/2.3/'
 })
 
 export const questionAPI = {
