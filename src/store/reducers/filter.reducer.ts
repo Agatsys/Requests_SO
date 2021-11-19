@@ -9,7 +9,7 @@ export type FilterReducerState = {
 }
 
 let initialState: FilterReducerState = {
-    pageSize: 5,
+    pageSize: 10,
     currentPage: 1,
     totalQuestionsCount: 0,
     sort: "activity",

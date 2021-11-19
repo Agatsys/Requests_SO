@@ -3,14 +3,17 @@ import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
 
-const CustomSkeleton = () => {
+const CustomSkeleton = ({
+    width,
+    height
+}) => {
     return (
-        <Box width={800} >
-            <Skeleton height={150} animation="wave" />
-            <Skeleton height={150} animation="wave" />
-            <Skeleton height={150} animation="wave" />
-            <Skeleton height={150} animation="wave" />
-            <Skeleton height={150} animation="wave" />
+        <Box width={width} >
+            <Skeleton height={height} animation="wave" />
+            <Skeleton height={height} animation="wave" />
+            <Skeleton height={height} animation="wave" />
+            <Skeleton height={height} animation="wave" />
+            <Skeleton height={height} animation="wave" />
         </Box>
     )
 }

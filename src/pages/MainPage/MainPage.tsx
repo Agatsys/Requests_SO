@@ -59,9 +59,9 @@ const MainPage = (props: Props) => {
         <div className="main-page">
             <div className="main-page__header">
                 <ButtonGroup variant="contained" aria-label="outlined button group">
-                    <Button onClick={() => props.setPageSize(5)}>5</Button>
                     <Button onClick={() => props.setPageSize(10)}>10</Button>
                     <Button onClick={() => props.setPageSize(15)}>15</Button>
+                    <Button onClick={() => props.setPageSize(20)}>20</Button>
                 </ButtonGroup>
                 <div className="main-page__sort">
                     <FormControl fullWidth>
@@ -90,7 +90,9 @@ const MainPage = (props: Props) => {
                     count={pagesCount} 
                 />
                 {props.questionsIsFetching
-                    ? <CustomSkeleton />
+                    ? <CustomSkeleton
+                        width={800}
+                        height={150} />
                     : <>
                         {props.items.map(item => (
                             <Question

@@ -8,6 +8,8 @@ import { getAnswers } from 'store/actions/actions'
 import { connect } from "react-redux";
 import Answer from "components/Answer/Answer";
 import { AnswerItem } from "store/reducers/answers.reducer";
+import { QuestionItem } from "store/reducers/questions.reducer";
+import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
 
 const style = {
     position: 'absolute',
@@ -24,6 +26,7 @@ const style = {
 
 type StateProps = {
     items: Array<AnswerItem>
+    questionsItems: Array<QuestionItem>
 }
 type OwnProps = {
     isOpen: boolean;
@@ -35,7 +38,8 @@ type DispatchProps = {
 }
 type Props = OwnProps & DispatchProps & StateProps
 
-const ModalAnswers = ({ items, isOpen, questionId, handleClose, getAnswers }: Props) => {
+
+const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, getAnswers }: Props) => {
 
     useEffect(() => {
         if (questionId !== null) {
@@ -43,6 +47,14 @@ const ModalAnswers = ({ items, isOpen, questionId, handleClose, getAnswers }: Pr
         }
         // eslint-disable-next-line
     }, [questionId])
+
+    const ownQuestion = (questionId: number, questionsItems: Array<QuestionItem>) => {
+        let id = questionId
+        let findQuestion = questionsItems.find(item => item.question_id === id)
+        return {
+            findQuestion
+        }
+    }
 
     return (
         <Modal
@@ -54,27 +66,33 @@ const ModalAnswers = ({ items, isOpen, questionId, handleClose, getAnswers }: Pr
         >
             <Box sx={style as any} >
                 <div className="main-page-modal">
-                    <div className="main-page-modal__title">
-                        Title question
-                    </div>
-                    <div className="main-page-modal__text">
-                        Bebra and her friends
-                    </div>
+                    {questionId && questionsItems
+                        ? <>
+                            <div className="main-page-modal__title">
+                                {ownQuestion(questionId, questionsItems).findQuestion.title}
+                            </div>
+                            <div className="main-page-modal__text">
+                                {ownQuestion(questionId, questionsItems).findQuestion.body}
+                            </div>
+                        </>
+                        : <CustomSkeleton
+                            width={500}
+                            height={100} />
+                    }
                 </div>
-                <>
-                    {items.map(item => (
-                        <Answer
-                            key={item.answer_id}
-                            data={item}/>
-                    ))}
-                </>
+                {items.map(item => (
+                    <Answer
+                        key={item.answer_id}
+                        data={item}/>
+                ))}
             </Box>
         </Modal>
 
     )
 }
 const mapStateToProps = (state: AppState) => ({
-    items: state.answers.items
+    items: state.answers.items,
+    questionsItems: state.questions.items
 })
 const mapDispatchToProps = {
     getAnswers: getAnswers

@@ -2,12 +2,12 @@ import * as axios from 'axios';
 
 
 const instance = axios.create({
-    baseURL: 'https://api.stackexchange.com/2.3/'
+    baseURL: 'https://api.stackexchange.co/2.3/'
 })
 
 export const questionAPI = {
-    getQuestions(currentPage = 1, pageSize = 5, sort = "activity") {
-        return instance.get(`questions?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow`)
+    getQuestions(currentPage = 1, pageSize = 10, sort = "activity") {
+        return instance.get(`questions?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow&filter=!nKzQUR3Egv`)
             .then(response => {
                 return response.data
             })

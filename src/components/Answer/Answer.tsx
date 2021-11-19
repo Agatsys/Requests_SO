@@ -12,9 +12,7 @@ type Props = OwnProps
 const Answer = (props: Props) => {
     return (
         <Card className="modal-window-answer"> 
-            <div className="modal-window-answer__text" dangerouslySetInnerHTML={{ __html: props.data.body }}>
-
-            </div>
+            <div className="modal-window-answer__text" dangerouslySetInnerHTML={{ __html: props.data.body }}></div>
         </Card>
     )
 }

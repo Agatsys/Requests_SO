@@ -27,6 +27,7 @@ export type QuestionItem = {
     content_license: string;
     link: string
     title: string
+    body?: any
 }
 
 let initialState: QuestionsReducerState = {
