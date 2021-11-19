@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./ModalAnswers.scss"
+import CloseIcon from '@mui/icons-material/Close';
 import { AppState } from '../../store/reducers/root.reducer'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -62,6 +63,9 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
             BackdropComponent={Backdrop}
             BackdropProps={{ timeout: 500 }}>
             <Box sx={style as any} className="main-page-modal" >
+                <div className="main-page-modal__close-icon" onClick={handleClose}>
+                   <CloseIcon/>
+                </div>
                 <div className="main-page-modal__question">
                     {questionId && questionsItems
                         ? <>
@@ -77,13 +81,6 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                             width={700}
                             height={100} />
                     }
-                </div>
-                <div className="main-page-modal__tags">
-                    {/* {ownQuestion(questionId, questionsItems).map(item => (
-
-                    )) */}
-
-                    {/* } */}
                 </div>
                 <div className="main-page-modal__answers-title">
                     Answers:

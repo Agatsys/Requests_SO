@@ -3,8 +3,8 @@
     font-family: Ubuntu;
     width: 1000px;
     height: 700px;
-    max-width: calc(100vw - 30px);
-    max-height: calc(100vh - 30px);
+    max-width: calc(100vw - 80px);
+    max-height: calc(100vh - 110px);
     overflow: auto;
     border: none !important;
     border-radius: 5px !important;
@@ -24,6 +24,12 @@
     &::-webkit-scrollbar-thumb:hover {
         background: #b8b8b8;
     }
+    &__close-icon {
+        top: 10px;
+        right: 10px;
+        align-self: center;
+        position: inherit;
+    }
     &__title {
         font-size: 25px;
         margin-bottom: 30px;
@@ -34,14 +40,10 @@
     &__text {
         font-size: 18px; 
         line-height: 1.2;
-        h3 {
-            font-size: 11px; 
-        }
         p {
             font-size: 18px; 
             line-height: 1.2;
             text-indent: 20px;
-            margin: 4px 0;
             color: rgb(2, 13, 49);
         }
         pre {
@@ -52,25 +54,13 @@
             background-color: rgb(230, 228, 228);
         }
         code {
-            font-size: 15px; 
-            margin: 13px 0 13px 0; 
-            padding: 13px;
-            margin: 6px 0 6px 0;
+            font-size: 15px;
+            
         }
         img {
-            border: 1px solid rgb(14, 10, 10);
             margin: 15px;
             max-width: 100%;
-        }
-        li {
-            font-size: 18px; 
-            line-height: 1.2;
-            margin-left: 20px;
-        }
-        strong {
-            font-weight: normal;
-        }
-        
+        }   
     }
     &__answers-title {
         margin: 20px 0 5px 0;
