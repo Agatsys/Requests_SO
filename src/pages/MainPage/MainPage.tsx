@@ -3,7 +3,7 @@ import { AppState } from '../../store/reducers/root.reducer'
 import Question from "../../components/Question/Question";
 import "./MainPage.scss";
 import Pagination from '@mui/material/Pagination';
-import { getQuestions, setPageSize, setSortRules, setCurrentPage } from "../../store/actions/actions";
+import { getQuestions, setPageSize, setSortRules, setCurrentPage, setTag } from "../../store/actions/actions";
 import { connect } from "react-redux";
 import { QuestionItem } from "store/reducers/questions.reducer";
 import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
@@ -30,6 +30,7 @@ type DispatchProps = {
     setPageSize: (pageSize: number) => void;
     setSortRules: (sort: string) => void;
     setCurrentPage: (page: number) => void;
+    setTag: (tag: string) => void;
 }
 type Props = StateProps & DispatchProps
 
@@ -38,6 +39,7 @@ type Props = StateProps & DispatchProps
 const MainPage = (props: Props) => {
 
     const [sort, setSort] = useState('');
+    const [activePageSize, setActivePageSize] = useState(10)
     const [modalState, setModalState] = useState({
         isOpen: false,
         questionId: null
@@ -59,9 +61,9 @@ const MainPage = (props: Props) => {
         <div className="main-page">
             <div className="main-page__header">
                 <ButtonGroup variant="contained" aria-label="outlined button group">
-                    <Button onClick={() => props.setPageSize(10)}>10</Button>
-                    <Button onClick={() => props.setPageSize(15)}>15</Button>
-                    <Button onClick={() => props.setPageSize(20)}>20</Button>
+                    <Button className={`${activePageSize === 10 ? 'active' : ''}`} onClick={() => props.setPageSize(10)}>10</Button>
+                    <Button className={`${activePageSize === 15 ? 'active' : ''}`} onClick={() => props.setPageSize(15)}>15</Button>
+                    <Button  onClick={() => props.setPageSize(20)}>20</Button>
                 </ButtonGroup>
                 <div className="main-page__sort">
                     <FormControl fullWidth>
@@ -99,6 +101,7 @@ const MainPage = (props: Props) => {
                                 openModal={(questionId: number) => openModal(questionId)}
                                 data={item}
                                 key={item.question_id}
+                                setTag={props.setTag}
                             />
                         ))}
                     </>
@@ -125,6 +128,7 @@ const mapDispatchToProps = {
     setPageSize: setPageSize,
     setSortRules: setSortRules,
     setCurrentPage: setCurrentPage,
+    setTag: setTag
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

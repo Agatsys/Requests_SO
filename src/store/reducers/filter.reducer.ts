@@ -1,4 +1,4 @@
-import { SET_CURRENT_PAGE, SET_TOTAL_QUESTIONS_COUNT, SET_PAGE_SIZE, SET_SORT_RULES } from '../actions/actions'
+import { SET_CURRENT_PAGE, SET_TOTAL_QUESTIONS_COUNT, SET_PAGE_SIZE, SET_SORT_RULES, SET_TAG } from '../actions/actions'
 
 
 export type FilterReducerState = {
@@ -6,13 +6,15 @@ export type FilterReducerState = {
     currentPage: number,
     totalQuestionsCount: number,
     sort: string,
+    tag: string
 }
 
 let initialState: FilterReducerState = {
-    pageSize: 10,
     currentPage: 1,
     totalQuestionsCount: 0,
+    pageSize: 10,
     sort: "activity",
+    tag: ""
 }
 
 
@@ -26,6 +28,8 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, pageSize: action.payload }
         case SET_SORT_RULES:
             return { ...state, sort: action.payload }
+        case SET_TAG:
+            return { ...state, tag: action.payload }
         default:
             return state; 
     }

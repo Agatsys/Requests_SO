@@ -16,8 +16,6 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
-    height: 700,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -64,19 +62,20 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
             BackdropComponent={Backdrop}
             BackdropProps={{ timeout: 500 }}
         >
-            <Box sx={style as any} >
-                <div className="main-page-modal">
+            <Box sx={style as any} className="main-page-modal" >
+                <div className="main-page-modal__question">
                     {questionId && questionsItems
                         ? <>
                             <div className="main-page-modal__title">
                                 {ownQuestion(questionId, questionsItems).findQuestion.title}
                             </div>
-                            <div className="main-page-modal__text">
-                                {ownQuestion(questionId, questionsItems).findQuestion.body}
-                            </div>
+                            <div 
+                                className="main-page-modal__text" 
+                                dangerouslySetInnerHTML={{ __html: ownQuestion(questionId, questionsItems).findQuestion.body}}
+                            ></div>
                         </>
                         : <CustomSkeleton
-                            width={500}
+                            width={700}
                             height={100} />
                     }
                 </div>

@@ -1,0 +1,22 @@
+
+.main-page-modal {
+    width: 700px;
+    height: auto;
+    max-width: calc(100vw - 30px);
+    max-height: calc(100vh - 30px);
+    overflow: auto;
+    &__title {
+        font-size: 25px;
+        margin-bottom: 20px;
+        color: rgb(15, 55, 114);
+    }
+    &__text {
+        font-size: 18px; 
+        p {
+            color: red;
+        }
+    }
+    &__text p {
+        font-size: 30px;
+    }
+}
