@@ -1,6 +1,6 @@
 
 .main-page-modal {
-    width: 700px;
+    width: 1000px;
     height: auto;
     max-width: calc(100vw - 30px);
     max-height: calc(100vh - 30px);
@@ -11,12 +11,30 @@
         color: rgb(15, 55, 114);
     }
     &__text {
-        font-size: 18px; 
         p {
-            color: red;
+            line-height: 1.2;
+            text-indent: 20px;
+            margin-top: 8px;
+            font-size: 18px; 
+            color: rgb(2, 13, 49);
+        }
+        pre {
+            font-size: 15px; 
+            line-height: 1.3;
+            margin: 13px 0 13px 0; 
+            padding: 13px;
+            background-color: rgb(230, 228, 228);
+        }
+        code {
+            font-size: 15px; 
+            margin: 13px 0 13px 0; 
+            padding: 13px;
+            margin: 6px 0 6px 0;
         }
     }
-    &__text p {
-        font-size: 30px;
+    &__answers {
+        margin: 12px 0 5px 0;
+        font-size: 25px; 
+        color: rgb(4, 5, 114);
     }
 }

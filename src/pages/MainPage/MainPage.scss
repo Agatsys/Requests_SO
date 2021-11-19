@@ -22,8 +22,9 @@
         align-items: center;
         width: 100%;
         min-height: calc(100vh - 100px);
-    }
-    
-    
+    }  
+}
+.pagination-button-active {
+    background-color: black;
 }
 

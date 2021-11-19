@@ -60,8 +60,7 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
             onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
-            BackdropProps={{ timeout: 500 }}
-        >
+            BackdropProps={{ timeout: 500 }}>
             <Box sx={style as any} className="main-page-modal" >
                 <div className="main-page-modal__question">
                     {questionId && questionsItems
@@ -79,11 +78,17 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                             height={100} />
                     }
                 </div>
-                {items.map(item => (
-                    <Answer
-                        key={item.answer_id}
-                        data={item}/>
-                ))}
+                <div className="main-page-modal__tags">
+
+                </div>
+                <div className="main-page-modal__answers">
+                    Answers:
+                    {items.map(item => (
+                        <Answer
+                            key={item.answer_id}
+                            data={item}/>
+                    ))}
+                </div>
             </Box>
         </Modal>
 

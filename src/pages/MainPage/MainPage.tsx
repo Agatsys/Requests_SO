@@ -35,15 +35,10 @@ type DispatchProps = {
 type Props = StateProps & DispatchProps
 
 
-
 const MainPage = (props: Props) => {
 
     const [sort, setSort] = useState('');
-    const [activePageSize, setActivePageSize] = useState(10)
-    const [modalState, setModalState] = useState({
-        isOpen: false,
-        questionId: null
-    })
+    const [modalState, setModalState] = useState({ isOpen: false, questionId: null })
     useEffect(() => {
         props.getQuestions()
         // eslint-disable-next-line
@@ -51,19 +46,25 @@ const MainPage = (props: Props) => {
     
     const openModal = (id: number) => setModalState({ isOpen: true, questionId: id }) 
     const closeModal = () => setModalState({ isOpen: false, questionId: null })
+    const pagesCount = Math.ceil(props.totalQuestionsCount / props.pageSize)
     const handleChange = (event: SelectChangeEvent) => {
         setSort(event.target.value as string);
     };
     
-    const pagesCount = Math.ceil(props.totalQuestionsCount / props.pageSize)
-
+    
     return (
         <div className="main-page">
             <div className="main-page__header">
                 <ButtonGroup variant="contained" aria-label="outlined button group">
-                    <Button className={`${activePageSize === 10 ? 'active' : ''}`} onClick={() => props.setPageSize(10)}>10</Button>
-                    <Button className={`${activePageSize === 15 ? 'active' : ''}`} onClick={() => props.setPageSize(15)}>15</Button>
-                    <Button  onClick={() => props.setPageSize(20)}>20</Button>
+                    <Button 
+                        variant={props.pageSize === 10 ? "contained" : "outlined"} 
+                        onClick={() => props.setPageSize(10)}>10</Button>
+                    <Button 
+                        variant={props.pageSize === 15 ? "contained" : "outlined"} 
+                        onClick={() => props.setPageSize(15)}>15</Button>
+                    <Button 
+                        variant={props.pageSize === 20 ? "contained" : "outlined"} 
+                        onClick={() => props.setPageSize(20)}>20</Button>
                 </ButtonGroup>
                 <div className="main-page__sort">
                     <FormControl fullWidth>
@@ -72,7 +73,7 @@ const MainPage = (props: Props) => {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={sort}
-                            label="Agdededede"
+                            label="Sort by:"
                             onChange={handleChange}>
                             <MenuItem value={"activity"} onClick={() => props.setSortRules("activity")}>Activity</MenuItem>
                             <MenuItem value={"votes"} onClick={() => props.setSortRules("votes")}>Votes</MenuItem>
