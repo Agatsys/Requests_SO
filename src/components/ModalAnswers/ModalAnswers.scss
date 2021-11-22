@@ -1,8 +1,8 @@
 
 .main-page-modal {
     font-family: Ubuntu;
-    width: 1000px;
-    height: 700px;
+    width: 1100px;
+    min-height: 700px;
     max-width: calc(100vw - 80px);
     max-height: calc(100vh - 110px);
     overflow: auto;
@@ -11,6 +11,9 @@
     
     scrollbar-width: auto;                       // scrollbar
     scrollbar-color: #dbdbdb transparent;
+    @media(max-width: 768px) {
+        max-height: calc(100vh - 150px);
+    }
     &::-webkit-scrollbar {
         width: 5px;
     }
@@ -23,7 +26,8 @@
     }
     &::-webkit-scrollbar-thumb:hover {
         background: #b8b8b8;
-    }
+    }                                            // scrollbar
+
     &__close-icon {
         top: 10px;
         right: 10px;
@@ -53,6 +57,7 @@
             margin: 13px 0 13px 0; 
             padding: 13px;
             background-color: rgb(230, 228, 228);
+            overflow: auto;
         }
         code {
             font-size: 15px;
