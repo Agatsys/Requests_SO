@@ -94,7 +94,6 @@ const MainPage = (props: Props) => {
                 />
                 {props.questionsIsFetching
                     ? <CustomSkeleton
-                        width={800}
                         height={150} />
                     : <>
                         {props.items.map(item => (

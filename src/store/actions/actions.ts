@@ -44,7 +44,7 @@ export const getQuestions = () => async (dispatch, getState: () => AppState) => 
         const data = await questionAPI.getQuestions(currentPage, pageSize, sort, tag)
         dispatch(questionsIsFetching(false));
         dispatch(setQuestions(data.items));
-        dispatch(setTotalQuestionsCount(data.quota_max));
+        dispatch(setTotalQuestionsCount(data.total));
     } catch(error) {
         console.error(error)
     }

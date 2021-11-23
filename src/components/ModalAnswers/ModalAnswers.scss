@@ -2,8 +2,8 @@
 .main-page-modal {
     font-family: Ubuntu;
     width: 1100px;
-    min-height: 700px;
-    max-width: calc(100vw - 80px);
+    height: 700px;
+    max-width: calc(100vw - 50px);
     max-height: calc(100vh - 110px);
     overflow: auto;
     border: none !important;
@@ -29,7 +29,7 @@
     }                                            // scrollbar
 
     &__close-icon {
-        top: 10px;
+        top: 13px;
         right: 10px;
         align-self: center;
         position: inherit;
@@ -61,7 +61,7 @@
         }
         code {
             font-size: 15px;
-            
+            overflow: auto;
         }
         img {
             margin: 15px;

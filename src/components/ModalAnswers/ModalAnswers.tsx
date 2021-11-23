@@ -20,7 +20,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 2,
 };
 
 type StateProps = {
@@ -78,7 +78,6 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                             ></div>
                         </>
                         : <CustomSkeleton
-                            width={700}
                             height={100} />
                     }
                 </div>

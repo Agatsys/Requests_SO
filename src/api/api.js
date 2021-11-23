@@ -7,12 +7,16 @@ const instance = axios.create({
 
 export const questionAPI = {
     getQuestions(currentPage = 1, pageSize = 10, sort = "activity", tag = "") {
-        return instance.get(`questions?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&tagged=${tag}&site=stackoverflow&filter=!nKzQUR3Egv`)
+        return instance.get(`questions?page=${currentPage}&pagesize=${pageSize}&order=desc&sort=${sort}&tagged=${tag}&site=stackoverflow&filter=!6VvPDzQ)xanT4`)
             .then(response => {
                 return response.data
             })
     },
 }
+
+// Filter includes:
+// question > body
+// .wrapper > total
 
 export const answersAPI = {
     getAnswers(questionId) {
