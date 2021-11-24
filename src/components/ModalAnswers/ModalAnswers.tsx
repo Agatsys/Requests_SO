@@ -72,11 +72,13 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                             <div className="main-page-modal__title">
                                 {ownQuestion(questionId, questionsItems).findQuestion.title}
                             </div>
-                            <div 
-                                className="main-page-modal__text" 
-                                dangerouslySetInnerHTML={{ __html: ownQuestion(questionId, questionsItems).findQuestion.body}}
-                            ></div>
-                        </>
+                            <div className="main-page-modal__text-wrapper">
+                                <div 
+                                    className="main-page-modal__text" 
+                                    dangerouslySetInnerHTML={{ __html: ownQuestion(questionId, questionsItems).findQuestion.body}}>
+                                </div>
+                            </div>
+                          </>
                         : <CustomSkeleton
                             height={100} />
                     }

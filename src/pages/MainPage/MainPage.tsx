@@ -24,6 +24,7 @@ type StateProps = {
     pageSize: number
     currentPage: number
     sort: string
+    tag: string
 }
 type DispatchProps = {
     getQuestions: () => void;
@@ -102,6 +103,7 @@ const MainPage = (props: Props) => {
                                 data={item}
                                 key={item.question_id}
                                 setTag={props.setTag}
+                                tag={props.tag}
                             />
                         ))}
                     </>
@@ -121,7 +123,8 @@ const mapStateToProps = (state: AppState) => ({
     questionsIsFetching: state.questions.questionsIsFetching,
     totalQuestionsCount: state.filter.totalQuestionsCount,
     pageSize: state.filter.pageSize,
-    sort: state.filter.sort
+    sort: state.filter.sort,
+    tag: state.filter.tag
 })
 const mapDispatchToProps = {
     getQuestions: getQuestions,

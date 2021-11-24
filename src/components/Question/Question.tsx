@@ -8,25 +8,26 @@ type OwnProps = {
     data: QuestionItem;
     openModal: (questionId: number) => void;
     setTag: (tag: string) => void;
+    tag: string;
 }
 type Props = OwnProps
 
 
-const Question = ({ setTag, data, openModal }: Props) => {
+const Question = (props: Props) => {
     return (
-        <Card className="main-page-question" onClick={() => openModal(data.question_id)}>
+        <Card className="main-page-question" onClick={() => props.openModal(props.data.question_id)}>
             <div className="main-page-question__title">
-                {data.title}
+                {props.data.title}
             </div>
-            {data.tags &&
+            {props.data.tags &&
                 <div className="main-page-question__tags">
-                    {data.tags.map((item, index) => (
+                    {props.data.tags.map((item, index) => (
                         <div 
-                            className="main-page-question__tag" 
+                            className={item === props.tag ? "main-page-question__active-tag" : "main-page-question__tag" }
                             key={index}
                             onClick={(event) => {
                                 event.stopPropagation()
-                                setTag(item)
+                                props.setTag(item)
                             }}>
                             {item}
                         </div>
