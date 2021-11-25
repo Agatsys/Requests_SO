@@ -66,6 +66,9 @@ const MainPage = (props: Props) => {
                         variant={props.pageSize === 20 ? "contained" : "outlined"} 
                         onClick={() => props.setPageSize(20)}>20</Button>
                 </ButtonGroup>
+                <div className="main-page__current-tag">
+                    tag
+                </div>
                 <div className="main-page__sort">
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
