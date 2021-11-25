@@ -23,7 +23,7 @@ const Question = (props: Props) => {
                 <div className="main-page-question__tags">
                     {props.data.tags.map((item, index) => (
                         <div 
-                            className={item === props.tag ? "main-page-question__active-tag" : "main-page-question__tag" }
+                            className={item === props.tag ? "main-page-question__active-tag" : "main-page-question__tag"}
                             key={index}
                             onClick={(event) => {
                                 event.stopPropagation()

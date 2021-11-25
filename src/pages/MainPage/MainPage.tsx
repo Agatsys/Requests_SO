@@ -16,7 +16,6 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 
-
 type StateProps = {
     items: Array<QuestionItem>
     questionsIsFetching: boolean
@@ -88,9 +87,7 @@ const MainPage = (props: Props) => {
             </div>
             <div className="main-page__question-wrapper">
                 <Pagination 
-                    onChange={(event, page) => {
-                        props.setCurrentPage(page)
-                    }}
+                    onChange={(event, page) => {props.setCurrentPage(page)}}
                     count={pagesCount} 
                 />
                 {props.questionsIsFetching

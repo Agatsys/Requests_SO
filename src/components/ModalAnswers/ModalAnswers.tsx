@@ -12,16 +12,6 @@ import { AnswerItem } from "store/reducers/answers.reducer";
 import { QuestionItem } from "store/reducers/questions.reducer";
 import CustomSkeleton from "components/CustomSkeleton/CustomSkeleton";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 2,
-};
 
 type StateProps = {
     items: Array<AnswerItem>
@@ -62,9 +52,9 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{ timeout: 500 }}>
-            <Box sx={style as any} className="main-page-modal" >
+            <Box className="main-page-modal" >  
                 <div className="main-page-modal__close-icon" onClick={handleClose}>
-                   <CloseIcon/>
+                    <CloseIcon/>
                 </div>
                 <div className="main-page-modal__question">
                     {questionId && questionsItems
@@ -78,7 +68,7 @@ const ModalAnswers = ({ questionsItems, items, isOpen, questionId, handleClose, 
                                     dangerouslySetInnerHTML={{ __html: ownQuestion(questionId, questionsItems).findQuestion.body}}>
                                 </div>
                             </div>
-                          </>
+                        </>
                         : <CustomSkeleton
                             height={100} />
                     }

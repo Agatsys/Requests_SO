@@ -1,13 +1,20 @@
 
 .main-page-modal {
+    top: 50%;
+    left: 50%;
+    position: absolute;
     font-family: Ubuntu;
     width: 1100px;
     height: 1000px;
     max-width: calc(100vw - 50px);
     max-height: calc(100vh - 110px);
     overflow: auto;
-    border: none !important;
+    transform: translate(-50%, -50%);
+    padding: 16px;
     border-radius: 5px !important;
+    border: 1px solid black;
+    background-color: white;
+    box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2), 0px 24px 38px 3px rgba(0,0,0,0.14), 0px 9px 46px 8px rgba(0,0,0,0.12);
     
     scrollbar-width: auto;                       // scrollbar
     scrollbar-color: #dbdbdb transparent;
@@ -27,7 +34,7 @@
     &::-webkit-scrollbar-thumb:hover {
         background: #b8b8b8;
     }                                            // scrollbar
-
+    
     &__close-icon {
         top: 13px;
         right: 10px;
@@ -36,8 +43,10 @@
         cursor: pointer;
     }
     &__title {
+        padding-bottom: 10px;
         font-size: 25px;
         font-weight: normal;
+        margin-right: 30px;
         margin-bottom: 30px;
         color: rgb(15, 55, 114);
         border-bottom: 2px solid black;
@@ -68,13 +77,25 @@
             font-size: 15px;
             overflow: auto;
         }
-        img {
-            margin: 15px;
+        a {
             max-width: 100%;
+            display: inline-block;
+            overflow: hidden;
+            text-decoration: none;
+            text-overflow: ellipsis;
+        }
+        img {
+            left: 100px;
+            max-width: 100%;
+            overflow: auto;
         }   
     }
     &__answers-title {
-        margin: 20px 0 5px 0;
+        //border: 1px solid transparent;
+        //padding: 1px;
+        flex-direction: column;
+        margin-top: 20px;
+        //margin: 20px 0 40px 0;
         height: 40px;
         font-size: 25px; 
         color: rgb(4, 5, 114);
