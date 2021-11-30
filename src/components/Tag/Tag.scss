@@ -1,0 +1,30 @@
+.question__tag {
+    display: flex;
+    justify-content: center;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 3px;
+    height: 24px;
+    width: auto;
+    font-size: 14px;
+    color: black;
+    background-color: rgb(215, 225, 243);
+    &:hover {
+        background-color: rgb(182, 193, 214);
+    }
+}
+.question__active-tag {
+    display: flex;
+    justify-content: center;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 3px;
+    height: 24px;
+    width: auto;
+    font-size: 14px;
+    color: black;
+    background-color: rgb(134, 172, 243);
+    &:hover {
+        background-color: rgb(163, 173, 192);
+    }
+}
